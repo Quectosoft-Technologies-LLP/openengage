@@ -401,8 +401,8 @@ Your sponsorship helps us:
 
 - **GitHub Sponsors:** Enable on the Quectosoft Technologies LLP org and add this project.
 - **Custom Support / SLAs:** For production SLAs, dedicated support, and roadmap influence, contact:
-  - Email: `support@quectosoft.com`
-  - Website: `https://www.quectosoft.com` (replace with your actual site)
+  - Email: `support@quectosofttech.com` or `subrit@quectosofttech.com` or `subrit@gmail.com`
+  - Website: `https://www.quectosofttech.com`
 - **Enterprise Deployments:** We offer paid help with on-prem / VPC deployment on AWS, GCP, Azure.
 
 ### Sponsor Recognition

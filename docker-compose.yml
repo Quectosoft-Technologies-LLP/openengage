@@ -1,0 +1,145 @@
+version: '3.9'
+
+services:
+  # ── Core Platform ──────────────────────────────
+  mautic:
+    image: mautic/mautic:5
+    ports:
+      - "8080:80"
+    environment:
+      MAUTIC_DB_HOST: db
+      MAUTIC_DB_NAME: mautic
+      MAUTIC_DB_USER: mautic
+      MAUTIC_DB_PASSWORD: mauticpass
+    volumes:
+      - mautic_data:/var/www/html
+    depends_on: [db]
+
+  # ── AI Gateway (FastAPI) ───────────────────────
+  ai_gateway:
+    build: ./ai_gateway
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:pass@db:5432/openengage
+      REDIS_URL: redis://redis:6379/0
+      CHROMA_URL: http://chromadb:8001
+      OLLAMA_URL: http://ollama:11434
+      MAUTIC_URL: http://mautic:80
+    depends_on: [db, redis, chromadb, ollama]
+
+  # ── Celery Workers ─────────────────────────────
+  worker:
+    build: ./ai_gateway
+    command: celery -A workers.celery_app worker --loglevel=info -Q campaign,email,scoring,agents -c 4
+    environment:
+      DATABASE_URL: postgresql://postgres:pass@db:5432/openengage
+      REDIS_URL: redis://redis:6379/0
+      OLLAMA_URL: http://ollama:11434
+    depends_on: [db, redis, ollama]
+
+  beat:
+    build: ./ai_gateway
+    command: celery -A workers.celery_app beat --loglevel=info
+    depends_on: [redis]
+
+  # ── LLM Server (Ollama) ────────────────────────
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  # ── Frontend (React) ───────────────────────────
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: http://localhost:8000
+      REACT_APP_WS_URL: ws://localhost:8000
+
+  # ── Analytics (Apache Superset) ───────────────
+  superset:
+    image: apache/superset:latest
+    ports:
+      - "8088:8088"
+    environment:
+      SUPERSET_SECRET_KEY: "openengage-superset-secret"
+    depends_on: [db]
+
+  # ── Live Chat (Chatwoot) ───────────────────────
+  chatwoot_app:
+    image: chatwoot/chatwoot:latest
+    ports:
+      - "3001:3000"
+    environment:
+      SECRET_KEY_BASE: "openengage-chatwoot-secret"
+      POSTGRES_HOST: db
+      POSTGRES_DATABASE: chatwoot
+      REDIS_URL: redis://redis:6379/1
+    depends_on: [db, redis]
+    command: bundle exec rails s
+
+  # ── Email MTA (Postal) ────────────────────────
+  postal:
+    image: ghcr.io/postalserver/postal:latest
+    ports:
+      - "5000:5000"
+    environment:
+      POSTAL_DB_HOST: db
+      POSTAL_REDIS_URL: redis://redis:6379/2
+    depends_on: [db, redis]
+    volumes:
+      - postal_data:/opt/postal/config
+
+  # ── Data Layer ────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: openengage
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./infra/init_db.sql:/docker-entrypoint-initdb.d/init.sql
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+
+  chromadb:
+    image: chromadb/chroma:latest
+    ports:
+      - "8001:8001"
+    volumes:
+      - chroma_data:/chroma/chroma
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: openengage
+      MINIO_ROOT_PASSWORD: openengage123
+    volumes:
+      - minio_data:/data
+
+volumes:
+  mautic_data:
+  pg_data:
+  redis_data:
+  chroma_data:
+  minio_data:
+  postal_data:
+  ollama_data:

@@ -1,0 +1,10 @@
+apiVersion: 1
+providers:
+- disableDeletion: false
+  folder: OpenEngage
+  name: OpenEngage
+  options:
+    path: /etc/grafana/provisioning/dashboards
+  orgId: 1
+  type: file
+  updateIntervalSeconds: 30

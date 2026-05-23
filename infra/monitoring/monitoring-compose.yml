@@ -1,0 +1,23 @@
+# Add to docker-compose.yml (monitoring stack)
+  prometheus:
+    image: prom/prometheus:latest
+    ports: ["9090:9090"]
+    volumes:
+      - ./infra/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.retention.time=30d
+
+  grafana:
+    image: grafana/grafana:latest
+    ports: ["3002:3000"]
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: "openengage_grafana_123"
+      GF_INSTALL_PLUGINS: "grafana-piechart-panel"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./infra/monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+    depends_on: [prometheus]
+
+  # Add to volumes:
+  # prometheus_data:
+  # grafana_data:

@@ -1,0 +1,23 @@
+# infra/monitoring/prometheus.yml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: openengage_gateway
+    static_configs:
+      - targets: ['ai_gateway:8000']
+    metrics_path: /metrics
+
+  - job_name: postgres
+    static_configs:
+      - targets: ['postgres_exporter:9187']
+
+  - job_name: redis
+    static_configs:
+      - targets: ['redis_exporter:9121']
+
+  - job_name: celery
+    static_configs:
+      - targets: ['flower:5555']
+    metrics_path: /metrics

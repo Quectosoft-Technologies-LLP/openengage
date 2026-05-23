@@ -1,0 +1,593 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "type": "datasource",
+      "pluginId": "prometheus"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.0.0"
+    }
+  ],
+  "id": null,
+  "uid": "openengage-main",
+  "title": "OpenEngage \u2014 Campaign & AI Analytics",
+  "tags": [
+    "openengage",
+    "marketing",
+    "ai"
+  ],
+  "timezone": "Asia/Kolkata",
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "30s",
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Active Campaigns",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "background",
+        "graphMode": "area"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "openengage_campaigns_active_total",
+          "legendFormat": "Active"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Emails Sent (24h)",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "background"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "increase(openengage_emails_sent_total[24h])",
+          "legendFormat": "Sent"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "Avg Open Rate (7d)",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 0
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "colorMode": "background"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.2
+              },
+              {
+                "color": "green",
+                "value": 0.3
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "openengage_email_open_rate",
+          "legendFormat": "Open Rate"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "New MQLs (7d)",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ]
+        },
+        "colorMode": "background"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "increase(openengage_mqls_total[7d])",
+          "legendFormat": "MQLs"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Email Open & Click Rate Over Time",
+      "gridPos": {
+        "h": 8,
+        "w": 14,
+        "x": 0,
+        "y": 4
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "custom": {
+            "lineWidth": 2,
+            "fillOpacity": 10
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "openengage_email_open_rate",
+          "legendFormat": "Open Rate"
+        },
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "openengage_email_click_rate",
+          "legendFormat": "Click Rate"
+        },
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "openengage_email_conversion_rate",
+          "legendFormat": "Conversion Rate"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "bargauge",
+      "title": "Contact Lifecycle Funnel",
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 14,
+        "y": 4
+      },
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "displayMode": "gradient"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlPu"
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "openengage_contacts_by_stage{stage=\"lead\"}",
+          "legendFormat": "Lead"
+        },
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "openengage_contacts_by_stage{stage=\"mql\"}",
+          "legendFormat": "MQL"
+        },
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "openengage_contacts_by_stage{stage=\"sql\"}",
+          "legendFormat": "SQL"
+        },
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "openengage_contacts_by_stage{stage=\"customer\"}",
+          "legendFormat": "Customer"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "type": "piechart",
+      "title": "AI Agent Invocations (7d)",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 12
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "pieType": "donut"
+      },
+      "targets": [
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "increase(openengage_agent_invocations_total{agent=\"campaign_strategy\"}[7d])",
+          "legendFormat": "Campaign Strategy"
+        },
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "increase(openengage_agent_invocations_total{agent=\"email_copywriter\"}[7d])",
+          "legendFormat": "Email Copywriter"
+        },
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "increase(openengage_agent_invocations_total{agent=\"segmentation\"}[7d])",
+          "legendFormat": "Segmentation"
+        },
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "increase(openengage_agent_invocations_total{agent=\"lead_scoring\"}[7d])",
+          "legendFormat": "Lead Scoring"
+        },
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "increase(openengage_agent_invocations_total{agent=\"analytics_analyst\"}[7d])",
+          "legendFormat": "Analytics"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "AI Agent Response Latency (p95)",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 12
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "custom": {
+            "lineWidth": 2
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "histogram_quantile(0.95, rate(openengage_agent_duration_seconds_bucket{agent=\"campaign_strategy\"}[5m]))",
+          "legendFormat": "Campaign Strategy p95"
+        },
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "histogram_quantile(0.95, rate(openengage_agent_duration_seconds_bucket{agent=\"email_copywriter\"}[5m]))",
+          "legendFormat": "Email Copywriter p95"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "type": "timeseries",
+      "title": "API Request Rate & Errors",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 12
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps"
+        }
+      },
+      "targets": [
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "rate(http_requests_total{job=\"openengage_gateway\"}[1m])",
+          "legendFormat": "Total RPS"
+        },
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "rate(http_requests_total{job=\"openengage_gateway\",status=~\"5..\"}[1m])",
+          "legendFormat": "5xx Errors"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "stat",
+      "title": "Salesforce Sync (last run)",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 20
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "background"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "openengage_crm_sync_records_total{crm=\"salesforce\"}",
+          "legendFormat": "Records"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "type": "stat",
+      "title": "HubSpot Sync (last run)",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 20
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "background"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "orange",
+                "value": null
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "openengage_crm_sync_records_total{crm=\"hubspot\"}",
+          "legendFormat": "Records"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "type": "stat",
+      "title": "Total Contacts",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 20
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "background"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "openengage_contacts_total",
+          "legendFormat": "Contacts"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "type": "stat",
+      "title": "Celery Queue Depth",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 20
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "background"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 100
+              },
+              {
+                "color": "red",
+                "value": 500
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": "${DS_PROMETHEUS}",
+          "expr": "sum(celery_queue_length)",
+          "legendFormat": "Queue Depth"
+        }
+      ]
+    }
+  ]
+}

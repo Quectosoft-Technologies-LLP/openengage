@@ -1,0 +1,63 @@
+
+graph TD
+    subgraph Frontend["🖥️ Frontend (React + TailwindCSS)"]
+        UI1[Campaign Builder UI]
+        UI2[GrapesJS Email/Page Editor]
+        UI3[Analytics Dashboard - Superset]
+        UI4[Live Chat - Chatwoot]
+        UI5[AI Copilot Chat Widget]
+    end
+
+    subgraph AgentLayer["🤖 LLM Agentic Layer (Python - LangGraph)"]
+        ORC[Orchestrator Agent]
+        CA[Campaign Strategy Agent]
+        LA[Lead Scoring Agent]
+        EA[Email Copywriter Agent]
+        SA[Segmentation Agent]
+        AA[Analytics Analyst Agent]
+        RAG[RAG Knowledge Base - ChromaDB]
+        MEM[Agent Memory Store - Redis]
+    end
+
+    subgraph CorePlatform["⚙️ Core Platform (Mautic PHP + FastAPI Bridge)"]
+        MAUTIC[Mautic Core - GPL3]
+        API[FastAPI Bridge / AI Gateway]
+        WORKER[Celery Campaign Workers]
+        BEAT[Celery Beat Scheduler]
+    end
+
+    subgraph DataLayer["🗄️ Data Layer"]
+        PG[(PostgreSQL - Contacts/Campaigns)]
+        REDIS[(Redis - Queue/Cache)]
+        MINIO[(MinIO - Assets)]
+        CHROMA[(ChromaDB - Vector Store)]
+    end
+
+    subgraph Integrations["🔗 Integrations"]
+        POSTAL[Postal MTA - Email Delivery]
+        CRM[Salesforce / HubSpot Webhook]
+        SMS[Twilio SMS]
+        WEB[Web Tracking JS Snippet]
+    end
+
+    UI1 --> API
+    UI2 --> API
+    UI5 --> ORC
+    ORC --> CA
+    ORC --> LA
+    ORC --> EA
+    ORC --> SA
+    ORC --> AA
+    CA --> RAG
+    LA --> CHROMA
+    API --> MAUTIC
+    API --> WORKER
+    WORKER --> POSTAL
+    WORKER --> SMS
+    MAUTIC --> PG
+    WORKER --> REDIS
+    BEAT --> WORKER
+    ORC --> MEM
+    MEM --> REDIS
+    AA --> UI3
+    MAUTIC --> CRM

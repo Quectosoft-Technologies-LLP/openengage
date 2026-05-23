@@ -388,6 +388,35 @@ cd ../frontend && npm install && npm start  # UI at localhost:3000
 
 ---
 
+## Sponsorship
+
+OpenEngage is maintained by **Quectosoft Technologies LLP** and the open-source community.
+
+Your sponsorship helps us:
+- Ship enterprise features faster (multi-tenant workspaces, advanced attribution, AI self-improvement)
+- Maintain integrations (Salesforce, HubSpot, Marketo, Postal, Superset)
+- Keep the core platform Apache-2.0 and self-hostable forever
+
+### How to Sponsor
+
+- **GitHub Sponsors:** Enable on the Quectosoft Technologies LLP org and add this project.
+- **Custom Support / SLAs:** For production SLAs, dedicated support, and roadmap influence, contact:
+  - Email: `support@quectosoft.com`
+  - Website: `https://www.quectosoft.com` (replace with your actual site)
+- **Enterprise Deployments:** We offer paid help with on-prem / VPC deployment on AWS, GCP, Azure.
+
+### Sponsor Recognition
+
+Sponsors can opt-in to be listed in the README:
+
+- **Platinum** — logo + link + short tagline
+- **Gold** — logo + link
+- **Silver** — text link
+
+If you sponsor this project and want to be listed, open a PR adding yourself to the **Sponsors** section or email us with your logo and preferred link.
+
+---
+
 ## License
 
 Apache 2.0 — see [LICENSE](LICENSE).

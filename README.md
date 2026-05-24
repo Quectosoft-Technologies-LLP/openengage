@@ -1,477 +1,291 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/OpenEngage-v1.0.0-6366f1?style=for-the-badge" />
-<img src="https://img.shields.io/badge/License-Apache%202.0-green?style=for-the-badge" />
-<img src="https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python" />
-<img src="https://img.shields.io/badge/React-18-61dafb?style=for-the-badge&logo=react" />
-<img src="https://img.shields.io/badge/LangGraph-Multi--Agent-8b5cf6?style=for-the-badge" />
-<img src="https://img.shields.io/badge/Patent%20Safe-✓-emerald?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Quectosoft%20Technologies%20LLP-OpenEngage%20Agentic%20Marketing-01696f?style=for-the-badge&logo=mailbox&logoColor=white" alt="Quectosoft Technologies LLP"/>
 
-# OpenEngage
+# 📧 OpenEngage
+## Agentic AI-Powered Marketing Automation Platform
 
-**The open-source, LLM-powered marketing automation platform.**  
-Built on Mautic · Extended with a LangGraph multi-agent AI layer ·  
-Integrates with Salesforce, HubSpot, and Adobe Marketo.
+### *An open-source, multi-agent, LLM-powered marketing automation stack that plans campaigns, writes emails, scores leads, syncs CRMs, and explains your analytics — on top of Mautic.*
 
-[Quick Start](#quick-start) · [Architecture](#architecture) · [AI Agents](#ai-agents) · [Integrations](#integrations) · [Deployment](#deployment) · [Contributing](#contributing)
+[![License: QSAL-1.0](https://img.shields.io/badge/License-QSAL--1.0-01696f.svg?style=flat-square)](LICENSE)
+[![Python 3.12+](https://img.shields.io/badge/Python-3.12+-3776AB.svg?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![React](https://img.shields.io/badge/Frontend-React%2018-61dafb?style=flat-square&logo=react&logoColor=white)](https://react.dev)
+[![Mautic](https://img.shields.io/badge/Automation-Mautic%205-ff6b35?style=flat-square)](https://mautic.org)
+[![LangGraph](https://img.shields.io/badge/Agents-LangGraph%20%7C%20Multi--LLM-7c3aed?style=flat-square)](https://github.com/langchain-ai/langgraph)
+[![Ollama](https://img.shields.io/badge/Default%20LLM-Ollama%20%7C%20Qwen3:8b-00b894?style=flat-square)](https://ollama.com)
+[![ChromaDB](https://img.shields.io/badge/Memory-ChromaDB%20%7C%20Postgres-e63946?style=flat-square)](https://www.trychroma.com)
+[![Docker](https://img.shields.io/badge/Runtime-Docker%20%7C%20GCP-2496ED?style=flat-square&logo=docker&logoColor=white)](https://docker.com)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-❤️-ea4aaa?style=flat-square&logo=github-sponsors)](https://github.com/sponsors/quectosofttech)
+
+<br/>
+
+**Author:** [Subrit Dikshit](mailto:subrit@quectosofttech.com)  
+**Emails:** [subrit@gmail.com](mailto:subrit@gmail.com) · [subrit@quectosofttech.com](mailto:subrit@quectosofttech.com)  
+**Organisation:** Quectosoft Technologies LLP · India
+
+<br/>
+
+> **Give it a business goal in natural language. OpenEngage plans the campaign, finds the audience, writes the emails, scores the leads, syncs Salesforce/HubSpot, and tells you what worked — all on top of Mautic.**
+
+<br/>
+
+[🚀 Quick Start](#-quick-start) · [✨ What Makes It Different](#-what-makes-this-different) · [🏗️ Architecture](#-architecture) · [📁 Repository Structure](#-repository-structure) · [🧠 LLM Providers](#-llm-providers) · [🤝 Contributing](#-contributing) · [💼 Sponsorship & Commercial Use](#-sponsorship--commercial-use) · [📄 License](#-license)
 
 </div>
 
 ---
 
-## What is OpenEngage?
+## ✨ What Makes This Different
 
-OpenEngage is a **production-grade, fully open-source** marketing automation platform that does what neither [Mautic](https://mautic.org) nor Adobe Marketo Engage does well — combines a battle-tested automation engine with a **LangGraph multi-agent AI layer** for intelligent, autonomous campaign recommendations.
-
-| Capability | Mautic | Adobe Marketo | **OpenEngage** |
-|---|:---:|:---:|:---:|
-| Email automation | ✅ | ✅ | ✅ |
-| Lead scoring | ✅ | ✅ | ✅ (rule-based, transparent) |
-| CRM sync (SF + HS) | ✅ | ✅ | ✅ |
-| Drag-drop email editor | ✅ | ✅ | ✅ (GrapesJS) |
-| AI campaign recommendations | ❌ | ❌ | ✅ **LangGraph** |
-| NL → audience segmentation | ❌ | ❌ | ✅ **SQL agent** |
-| AI email copywriting | ❌ | ❌ | ✅ **A/B variants** |
-| Marketo data migration | ❌ | N/A | ✅ **Bulk export** |
-| Self-hosted / on-prem | ✅ | ❌ | ✅ |
-| License | GPL-3 | Proprietary | **Apache-2.0** |
-| Cost | Free | $895–$3,750/mo | **Free** |
+| Feature | Description |
+|---|---|
+| 🧠 **Agentic AI Layer** | LangGraph supervisor + 5 specialist agents (Campaign Strategy, Email Copywriter, Lead Scoring, Segmentation, Analytics Analyst) orchestrate on top of Mautic. |
+| 📧 **AI Campaign Recommendations** | Plans 4–8 week multi-channel nurtures, A/B tests, goal KPIs — something neither Mautic nor Marketo does natively. |
+| ✍️ **AI Email Copywriter** | Generates subject-line variants and full HTML emails, integrated directly into GrapesJS with personalization tokens. |
+| 🎯 **Transparent Lead Scoring** | Rule-based, additive scoring with explainable rules — patent-safe alternative to opaque ML scoring. |
+| 📊 **Analytics Analyst** | Reads Superset dashboards via API and explains ROI, attribution, and what to fix next. |
+| 🔌 **Deep Integrations** | First-class adapters for Salesforce, HubSpot, Adobe Marketo bulk migration, CSV import with dedup, and web tracking JS snippet. |
+| 🧩 **Mautic-Native Friendly** | Designed as a sidecar AI layer around Mautic’s APIs and webhooks — no forked core. |
+| 🧱 **Prod-Ready Stack** | JWT auth, rate limiting, TLS Nginx, Prometheus/Grafana, CI/CD, Docker Compose, Alembic migrations, and tests. |
 
 ---
 
-## Architecture
+## 🏗️ Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  🖥️  FRONTEND  (React 18 + TailwindCSS + GrapesJS)          │
-│   Dashboard · Campaign Builder · Email Editor · Copilot     │
-└──────────────────────┬──────────────────────────────────────┘
+```text
+┌─────────────────────────────────────────────────────────────────┐
+│                    FRONTEND (React 18)                         │
+│  Dashboard · Campaign Builder · GrapesJS Email Editor · Copilot│
+└──────────────────────┬──────────────────────────────────────────┘
                        │ HTTP/WS
-┌──────────────────────▼──────────────────────────────────────┐
-│  ⚙️  AI GATEWAY  (FastAPI + Prometheus + JWT auth)           │
-│   REST API · /ws/copilot WebSocket · /webhooks              │
-└──────┬───────────────┬─────────────────────────────────────-┘
-       │ invoke        │ tasks
-┌──────▼───────┐  ┌────▼────────────────────────────────────┐
-│ 🤖 LangGraph │  │ 📦 Celery Workers (4 queues)             │
-│ Orchestrator │  │   campaign · email · scoring · crm_sync  │
-│  ├─ Campaign │  └────┬────────────────────────────────────-┘
-│  ├─ Scoring  │       │ API calls
-│  ├─ Email    │  ┌────▼─────────────────────────────────────┐
-│  ├─ Segment  │  │ 🔧 Mautic Core (PHP/Symfony GPL-3)       │
-│  └─ Analyst  │  │   Contacts · Campaigns · Forms · Segments │
-└──────┬───────┘  └────┬────────────────────────────────────-┘
-       │ RAG            │ SQL/cache
+┌──────────────────────▼──────────────────────────────────────────┐
+│      AI GATEWAY (FastAPI + LangGraph + JWT + Prometheus)       │
+│   /api/*   REST  · /ws/copilot/* WebSocket · /webhooks/*       │
+└──────┬───────────────┬──────────────────────────────────────────┘
+       │               │ Celery tasks
+┌──────▼───────┐  ┌────▼─────────────────────────────────────────┐
+│ 🤖 Orchestr. │  │ Celery Workers (campaign · email · scoring   │
+│  Agent       │  │                 · agents · crm_sync)         │
+│  ├─ Campaign │  └────┬─────────────────────────────────────────┘
+│  ├─ Email    │       │ API bridge
+│  ├─ Scoring  │  ┌────▼─────────────────────────────────────────┐
+│  ├─ Segment  │  │ Mautic Core (PHP/Symfony)                    │
+│  └─ Analyst  │  │ Contacts · Segments · Campaigns · Emails     │
+└──────┬───────┘  └────┬─────────────────────────────────────────┘
+       │ RAG            │ DB, cache, vectors
        ▼                ▼
-┌─────────────────────────────────────────────────────────────┐
-│  🗄️  DATA LAYER                                             │
-│   PostgreSQL · Redis · ChromaDB · MinIO · Ollama            │
-└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│ DATA LAYER: PostgreSQL · Redis · ChromaDB · MinIO · Ollama     │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
-- Docker 24+ and Docker Compose v2
-- NVIDIA GPU (optional, for faster LLM inference — CPU mode works)
-- 16 GB RAM minimum (32 GB recommended with GPU)
+
+- Docker 24+ and Docker Compose v2  
+- Python 3.12+ (for dev)  
+- [Ollama](https://ollama.com) installed and running  
+- 16 GB RAM minimum (32 GB recommended)
+
+### 1 — Clone & Configure
 
 ```bash
-# 1. Clone
-git clone https://github.com/your-org/openengage.git
+git clone https://github.com/Quectosoft-Technologies-LLP/openengage.git
 cd openengage
 
-# 2. Configure environment
 cp .env.example .env
-# Edit .env — set JWT_SECRET (32+ chars), DB passwords, API keys
+# Edit .env:
+# - Set JWT_SECRET (32+ chars)
+# - Set DATABASE_URL / REDIS_URL
+# - Leave LLM_PROVIDER=ollama for default local usage
+```
 
-# 3. Start all services
+### 2 — Start Stack
+
+```bash
 docker compose up -d
 
-# 4. Bootstrap (pulls LLM models, runs migrations, seeds Superset)
+# Run database migrations
+docker compose exec ai_gateway alembic upgrade head
+
+# Bootstrap models & Superset
 chmod +x setup.sh && ./setup.sh
 ```
 
-**That's it.** Access:
+### 3 — Open the UI
 
-| Service | URL | Credentials |
-|---|---|---|
-| Frontend | http://localhost:3000 | — |
-| AI Gateway (API) | http://localhost:8000/docs | — |
-| Mautic Core | http://localhost:8080 | admin/admin (first run) |
-| Superset Analytics | http://localhost:8088 | admin/admin123 |
-| Chatwoot Live Chat | http://localhost:3001 | Setup on first run |
-| Postal MTA | http://localhost:5000 | Setup on first run |
-| Grafana | http://localhost:3002 | admin/openengage_grafana_123 |
-| MinIO Console | http://localhost:9001 | openengage/openengage123 |
+| Service | URL |
+|---|---|
+| OpenEngage UI | http://localhost:3000 |
+| AI Gateway API | http://localhost:8000/docs |
+| Mautic | http://localhost:8080 |
+| Superset | http://localhost:8088 |
+| Grafana | http://localhost:3002 |
 
 ---
 
-## AI Agents
+## 📁 Repository Structure
 
-OpenEngage uses a **LangGraph supervisor pattern** — the Orchestrator Agent receives user messages and dynamically routes them to the right specialist agent.
-
-### Using the AI Copilot (WebSocket)
-```javascript
-// React hook
-const { messages, send, connected } = useCopilot("my-session");
-
-send("Create a 6-week nurture campaign for fintech leads who downloaded our whitepaper");
-// → Routes to Campaign Strategy Agent
-// → Returns: campaign timeline, email sequence, KPIs, A/B test suggestions
-
-send("Write 3 subject lines for a demo invite targeting CTOs");
-// → Routes to Email Copywriter Agent
-// → Returns: A/B/C variants with curiosity/urgency/clarity scores
-
-send("Show me all BFSI contacts with score above 40 who haven't opened in 30 days");
-// → Routes to Segmentation Agent
-// → Returns: SQL WHERE clause + estimated count + re-engagement campaign suggestion
-```
-
-### REST API
-```bash
-# Campaign suggestion
-curl -X POST http://localhost:8000/api/agents/suggest-campaign \
-  -H "Authorization: Bearer YOUR_JWT" \
-  -H "Content-Type: application/json" \
-  -d '{"industry": "BFSI", "goal": "Generate SQLs from webinar attendees", "audience_size": 2400}'
-
-# Generate email
-curl -X POST http://localhost:8000/api/agents/generate-email \
-  -H "Authorization: Bearer YOUR_JWT" \
-  -d '{"session_id": "s1", "message": "Follow-up email for demo no-shows, professional tone"}'
-```
-
-### Swapping LLM Models
-Edit `ai_gateway/agents/orchestrator.py` — one line:
-```python
-self.llm = ChatOllama(model="llama3.1:8b")    # Llama 3.1
-self.llm = ChatOllama(model="qwen3:8b")        # Qwen 3
-self.llm = ChatOllama(model="gemma3:12b")      # Gemma 3
-# Point to a fine-tuned model loaded in your local Ollama instance
-```
-
----
-
-## Integrations
-
-### Marketo → OpenEngage Migration
-```bash
-# Set credentials in .env, then run:
-cd integrations/marketo_migration
-python migrate.py
-# Output: ✅ Imported: 12,847 | Deduped: 234 | Errors: 3 | Templates: 48
-```
-
-### Salesforce Sync
-```bash
-# Trigger manual pull (or auto-runs every 30 min via Celery Beat)
-curl -X POST http://localhost:8000/api/integrations/sync/salesforce \
-  -H "Authorization: Bearer YOUR_JWT"
-```
-
-Configure Salesforce → OpenEngage outbound messages:
-1. Salesforce Setup → Outbound Messages → New
-2. Endpoint URL: `https://your-openengage.com/webhooks/salesforce`
-3. Fields: `Email`, `Status`, `Title`, `Company`
-
-### HubSpot Sync
-```bash
-curl -X POST http://localhost:8000/api/integrations/sync/hubspot \
-  -H "Authorization: Bearer YOUR_JWT"
-```
-
-Configure HubSpot webhooks:
-1. HubSpot portal → Settings → Integrations → Private Apps
-2. Webhook URL: `https://your-openengage.com/webhooks/hubspot`
-3. Subscribe: `contact.creation`, `contact.propertyChange`
-
-### CSV Import with Deduplication
-```bash
-# Upload CSV
-curl -X POST http://localhost:8000/api/contacts/import \
-  -H "Authorization: Bearer YOUR_JWT" \
-  -F "file=@my_contacts.csv" \
-  -F "on_conflict=update"
-# Returns: { "job_id": "abc-123" }
-
-# Poll status
-curl http://localhost:8000/api/contacts/import/abc-123
-# Returns: { "inserted": 1842, "updated": 312, "duplicates_in_csv": 47, ... }
-```
-
-Supported CSV column aliases: `email`, `e-mail`, `mail`, `emailaddress` → all map to `email`. Auto-detects comma, semicolon, tab, and pipe delimiters.
-
-### Web Tracking Snippet
-```html
-<!-- Add to your website <head> -->
-<script src="https://your-openengage.com/tracker.js" async></script>
-<script>
-  // After user login/form submit:
-  OpenEngage.identify("user@company.com");
-  OpenEngage.track("demo_requested", { plan: "enterprise" });
-</script>
-```
-
----
-
-## Deployment
-
-### Docker Compose (Single Server)
-```bash
-# Production start
-ENV=production docker compose -f docker-compose.yml up -d
-
-# Run migrations
-docker compose exec ai_gateway alembic upgrade head
-
-# Scale workers
-docker compose up -d --scale worker=4
-```
-
-### GCP / Kubernetes
-```bash
-# GCP VM (asia-south1 — closest to Noida)
-gcloud compute instances create openengage-prod \
-  --machine-type=n2-standard-8 \
-  --zone=asia-south1-a \
-  --boot-disk-size=100GB \
-  --image-family=ubuntu-2204-lts \
-  --accelerator=type=nvidia-tesla-t4,count=1
-
-# Deploy
-scp -r . openengage-prod:/opt/openengage
-ssh openengage-prod "cd /opt/openengage && ./setup.sh"
-```
-
-### Environment Variables
-Copy `.env.example` → `.env`. Required keys:
-
-```env
-JWT_SECRET=your_32_char_minimum_secret_key_here
-DATABASE_URL=postgresql://postgres:STRONG_PASS@db:5432/openengage
-REDIS_URL=redis://redis:6379/0
-OLLAMA_URL=http://ollama:11434
-ALLOWED_ORIGINS=https://your-openengage.com
-```
-
----
-
-## Patent Safety
-
-OpenEngage deliberately avoids all identified Adobe/Marketo patented methods:
-
-| ❌ Avoided | Patent | Safe Alternative Used |
-|---|---|---|
-| Sentiment-weighted lead scoring | US20160140627A1 | Additive rule-based points |
-| Time-decay probabilistic scoring | US10657559B2 | Simple open/click counters |
-| ML-predicted resource allocation | US11025713B2 | Static Celery priority queues |
-| Probabilistic multi-order attribution | US10475067B2 | Standard linear attribution |
-| Social sentiment → auto campaigns | US10528987B2 | No social sentiment engine |
-| Lead intelligence via social tokens | US20130238435A1 | Standard UTM parameters |
-
-> ⚠️ This is not legal advice. Consult a patent attorney before commercial deployment.
-
----
-
-## Project Structure
-
-```
+```text
 openengage/
-├── ai_gateway/                 # FastAPI AI layer
-│   ├── agents/                 # LangGraph specialist agents
-│   │   ├── orchestrator.py     # Supervisor router
+├── README.md
+├── LICENSE                     ← QSAL-1.0
+├── CONTRIBUTING.md
+├── .env.example
+├── docker-compose.yml
+├── setup.sh
+│
+├── ai_gateway/
+│   ├── main.py                 ← FastAPI app (JWT, CORS, metrics)
+│   ├── llm/registry.py         ← Multi-provider LLM registry (Ollama default)
+│   ├── agents/
+│   │   ├── orchestrator.py     ← LangGraph supervisor
 │   │   ├── campaign_strategy.py
-│   │   ├── lead_scoring.py
 │   │   ├── email_copywriter.py
+│   │   ├── lead_scoring.py
 │   │   ├── segmentation.py
 │   │   └── analytics_analyst.py
-│   ├── middleware/             # Auth, security headers, logging
-│   ├── models/                 # SQLAlchemy ORM
-│   ├── routers/                # FastAPI route handlers
-│   └── workers/                # Celery tasks + beat scheduler
-├── frontend/                   # React 18 + TailwindCSS
-│   └── src/
-│       ├── components/         # Dashboard, CampaignBuilder, EmailEditor, CopilotChat
-│       ├── hooks/              # useCopilot (WebSocket)
-│       └── api/                # Axios client
+│   ├── middleware/             ← auth, security headers, logging
+│   ├── routers/
+│   │   ├── agents.py
+│   │   ├── import_contacts.py
+│   │   ├── health.py
+│   │   └── webhooks/…
+│   ├── models/db_models.py
+│   ├── workers/                ← Celery app + tasks
+│   └── tests/
+│       ├── test_migrations.py
+│       ├── test_api.py
+│       └── pytest.ini
+│
+├── frontend/
+│   ├── Dockerfile
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── api/client.js
+│   │   ├── hooks/useCopilot.js
+│   │   └── components/
+│   │       ├── Dashboard/…
+│   │       ├── CampaignBuilder/…
+│   │       ├── EmailEditor/…
+│   │       ├── CopilotChat/…
+│   │       └── Contacts/ContactsPage.jsx
+│   └── tailwind.config.js
+│
 ├── integrations/
-│   ├── salesforce/             # Bi-directional SF sync
-│   ├── hubspot/                # Bi-directional HS sync + webhooks
-│   ├── marketo_migration/      # Full Marketo bulk export + import
-│   ├── csv_import/             # CSV parser + deduplication pipeline
-│   └── webhooks/               # Inbound webhook router + JS tracker
-├── alembic/                    # DB migrations (3 revisions)
-├── infra/
-│   ├── nginx/                  # TLS-terminating reverse proxy
-│   └── monitoring/             # Prometheus + Grafana config
-├── .github/workflows/          # CI/CD (test → scan → build → deploy to GCP)
-├── docker-compose.yml          # Full 12-service stack
-├── setup.sh                    # One-command bootstrap
-└── .env.example                # All environment variables documented
+│   ├── salesforce/adapter.py
+│   ├── hubspot/adapter.py
+│   ├── marketo_migration/migrate.py
+│   ├── csv_import/importer.py
+│   └── webhooks/
+│       ├── router.py
+│       └── tracker.js
+│
+├── alembic/
+│   ├── env.py
+│   └── versions/
+│       ├── 001_initial.py
+│       ├── 002_scoring_attribution.py
+│       └── 003_integrations.py
+│
+└── infra/
+    ├── nginx/nginx.conf
+    └── monitoring/
+        ├── prometheus.yml
+        └── grafana/dashboards/openengage.json
 ```
 
 ---
 
-## Tech Stack
+## 🧠 LLM Providers
 
-| Layer | Technology | License |
-|---|---|---|
-| Marketing Core | [Mautic 5](https://mautic.org) | GPL-3.0 |
-| AI Gateway | FastAPI + Uvicorn | MIT |
-| Multi-Agent AI | LangGraph + LangChain | MIT |
-| LLM Runtime | Ollama (Qwen3, Llama3.1) | MIT |
-| Vector Store | ChromaDB | Apache-2.0 |
-| Email Editor | GrapesJS | BSD-3 |
-| Analytics | Apache Superset | Apache-2.0 |
-| Live Chat | Chatwoot | AGPL-3.0 |
-| Email MTA | Postal | BSL-1.1 |
-| Task Queue | Celery + Redis | BSD |
-| Database | PostgreSQL 16 | PostgreSQL |
-| Monitoring | Prometheus + Grafana | Apache-2.0 |
-| CI/CD | GitHub Actions | — |
-| Frontend | React 18 + TailwindCSS | MIT |
-
----
-
-## Production Checklist
-
-Before going live, verify:
-
-- [ ] `JWT_SECRET` set to 32+ random chars in `.env`
-- [ ] All default passwords changed in `.env`
-- [ ] `ENV=production` set (disables Swagger UI)
-- [ ] `ALLOWED_ORIGINS` set to your actual domain
-- [ ] TLS certificate installed at `infra/nginx/ssl/`
-- [ ] Alembic migrations run: `alembic upgrade head`
-- [ ] Ollama models pulled: `ollama pull qwen3:8b && ollama pull nomic-embed-text`
-- [ ] Postal MTA configured with your SMTP relay
-- [ ] Grafana dashboard connected to Prometheus
-- [ ] GitHub Actions secrets set: `GCP_SA_KEY`, `GITHUB_TOKEN`
-- [ ] Salesforce/HubSpot webhook URLs configured with HMAC secrets
-
----
-
-## Contributing
-
-We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) first.
-
-```bash
-# Development setup
-git clone https://github.com/your-org/openengage
-cd openengage
-cp .env.example .env         # Set ENV=development
-docker compose up -d db redis chromadb ollama
-cd ai_gateway && pip install -r requirements.txt
-uvicorn main:app --reload    # API at localhost:8000
-cd ../frontend && npm install && npm start  # UI at localhost:3000
-```
-
-### Branch Strategy
-- `main` — production-ready, protected
-- `develop` — integration branch
-- `feature/*` — feature branches → PR to develop
-- `hotfix/*` — emergency fixes → PR to main
-
----
-
-## Roadmap
-
-- [ ] **v1.1** — Contacts UI (CSV upload UI, CRM sync dashboard)
-- [ ] **v1.2** — Mautic native plugin (replace API bridge with direct plugin)
-- [ ] **v1.3** — Multi-tenant workspace support
-- [ ] **v1.4** — Agent self-improvement (fine-tune on your own campaign data)
-- [ ] **v2.0** — Kubernetes Helm chart + GCP Marketplace listing
-
----
-
-## Sponsorship
-
-OpenEngage is maintained by **Quectosoft Technologies LLP** and the open-source community.
-
-Your sponsorship helps us:
-- Ship enterprise features faster (multi-tenant workspaces, advanced attribution, AI self-improvement)
-- Maintain integrations (Salesforce, HubSpot, Marketo, Postal, Superset)
-- Keep the core platform Apache-2.0 and self-hostable forever
-
-### How to Sponsor
-
-- **GitHub Sponsors:** Enable on the Quectosoft Technologies LLP org and add this project.
-- **Custom Support / SLAs:** For production SLAs, dedicated support, and roadmap influence, contact:
-  - Email: `support@quectosofttech.com` or `subrit@quectosofttech.com` or `subrit@gmail.com`
-  - Website: `https://www.quectosofttech.com`
-- **Enterprise Deployments:** We offer paid help with on-prem / VPC deployment on AWS, GCP, Azure.
-
-### Sponsor Recognition
-
-Sponsors can opt-in to be listed in the README:
-
-- **Platinum** — logo + link + short tagline
-- **Gold** — logo + link
-- **Silver** — text link
-
-If you sponsor this project and want to be listed, open a PR adding yourself to the **Sponsors** section or email us with your logo and preferred link.
-
----
-
-## License
-
-Apache 2.0 — see [LICENSE](LICENSE).
-
-> Built with ❤️ by the OpenEngage community.  
-> Powered by [Mautic](https://mautic.org) · [LangGraph](https://github.com/langchain-ai/langgraph) · [Ollama](https://ollama.com)
-
----
-
-## LLM Providers
-
-OpenEngage ships with **7 LLM provider integrations** via a universal registry.
-**Default is Ollama** — fully local, no API key, no data leaves your server.
-
-Switch providers by changing one environment variable — **zero agent code changes needed.**
+OpenEngage uses a **universal LLM registry**. Default is **Ollama** (local, no keys). You can switch providers via environment variables, without changing agent code.
 
 ```env
-LLM_PROVIDER=ollama      # default — local, free, private
-LLM_PROVIDER=openai      # GPT-4o, GPT-4o-mini, o3-mini
-LLM_PROVIDER=claude      # Claude 3.5 Haiku / Sonnet 3.7 / Opus
+LLM_PROVIDER=ollama      # default — fully local
+LLM_PROVIDER=openai      # GPT-4o / GPT-4o-mini / o3-mini
+LLM_PROVIDER=claude      # Claude 3.5 Haiku / Sonnet
 LLM_PROVIDER=gemini      # Gemini 2.0 Flash / 2.5 Pro
-LLM_PROVIDER=grok        # xAI Grok-3 / Grok-3-mini
-LLM_PROVIDER=llamacpp    # Any local GGUF model via llama-server
-LLM_PROVIDER=azure_openai # Azure OpenAI (enterprise data residency)
+LLM_PROVIDER=grok        # xAI Grok 3
+LLM_PROVIDER=llamacpp    # local GGUF via llama-server
+LLM_PROVIDER=azure_openai
 ```
 
-### Provider Comparison
+| Provider | Local | Key | Notes |
+|---|:---:|:---:|---|
+| **Ollama** | ✅ | ❌ | Default; `qwen3:8b`, `llama3.1`, `gemma3` |
+| OpenAI | ❌ | ✅ | GPT-4o family |
+| Claude | ❌ | ✅ | Long-context, structured reasoning |
+| Gemini | ❌ | ✅ | Multimodal, Google ecosystem |
+| Grok | ❌ | ✅ | Real-time + X/Twitter context |
+| llama.cpp | ✅ | ❌ | Any GGUF via `llama-server` |
+| Azure OpenAI | ❌ | ✅ | Enterprise deployments |
 
-| Provider | Local | API Key | Best For | Default Model |
-|---|:---:|:---:|---|---|
-| **Ollama** ✅ | ✅ | ❌ | Privacy, cost-zero, on-prem | `qwen3:8b` |
-| OpenAI | ❌ | ✅ | Highest quality, production SaaS | `gpt-4o-mini` |
-| Claude | ❌ | ✅ | Long context, nuanced copy | `claude-3-5-haiku` |
-| Gemini | ❌ | ✅ | Multimodal, Google ecosystem | `gemini-2.0-flash` |
-| Grok | ❌ | ✅ | Real-time data, X/Twitter context | `grok-3-mini` |
-| llama.cpp | ✅ | ❌ | Fine-tuned GGUF models, GPU servers | any GGUF |
-| Azure OpenAI | ❌ | ✅ | Enterprise compliance, EU data residency | `gpt-4o` |
+---
 
-### Per-Agent LLM Override
-```python
-# agents/email_copywriter.py — use GPT-4o just for copy quality
-from llm.registry import get_llm
+## 🤝 Contributing
 
-class EmailCopywriterAgent:
-    def __init__(self):
-        # Override: use OpenAI for best copy, even if global provider is Ollama
-        self.llm = get_llm(provider="openai", temperature=0.7)
-```
+We welcome PRs from developers, marketers, and AI enthusiasts.
 
-### llama.cpp Setup (local GGUF models)
 ```bash
-# Pull and run any GGUF model
-wget https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/main/qwen3-8b-q4_k_m.gguf
-llama-server -m qwen3-8b-q4_k_m.gguf --port 8080 -c 4096 --n-gpu-layers 35
-# Set in .env:
-LLM_PROVIDER=llamacpp
-LLAMACPP_URL=http://localhost:8080
+git checkout -b feat/your-feature
+cd ai_gateway && pytest tests/ -v
+cd ../frontend && npm test
+git commit -m "feat: your feature"
+git push origin feat/your-feature
 ```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for coding standards, commit style, and patent-safety notes.
+
+---
+
+## 💼 Sponsorship & Commercial Use
+
+OpenEngage is licensed under **QSAL-1.0 (Quectosoft Agentic AI License)** — free for:
+
+- Students, hobbyists, researchers, educators  
+- Non-profits and open-source tooling
+
+**Commercial use (for-profit, agencies, SaaS, consultants)** requires either:
+
+- A commercial license — email **subrit@quectosofttech.com**, subject: `"OpenEngage Commercial License"`  
+- Or an agreed GitHub Sponsor tier: [github.com/sponsors/quectosofttech](https://github.com/sponsors/quectosofttech)
+
+See [LICENSE](LICENSE) for full terms.
+
+---
+
+## 📄 License
+
+> **Quectosoft Technologies LLP Agentic AI License (QSAL-1.0)**  
+> Copyright (c) 2026 Quectosoft Technologies LLP  
+> Author: **Subrit Dikshit**
+
+Free for education, research, and non-commercial use; commercial use requires sponsorship or a paid license.
+
+---
+
+## 📬 Contact
+
+| Channel | Details |
+|---|---|
+| 📧 Personal | [subrit@gmail.com](mailto:subrit@gmail.com) |
+| 📧 Work | [subrit@quectosofttech.com](mailto:subrit@quectosofttech.com) |
+| 🌐 Org | Quectosoft Technologies LLP |
+| 🐛 Issues | [GitHub Issues](https://github.com/Quectosoft-Technologies-LLP/openengage/issues) |
+| ❤️ Sponsors | [GitHub Sponsors](https://github.com/sponsors/quectosofttech) |
+
+---
+
+<div align="center">
+
+**Built with ❤️ by Quectosoft Technologies LLP and the OpenEngage community.**
+
+*If this project helps you, please ⭐ star the repo and share it with someone who should be running agentic marketing on open source.*
+
+</div>
